@@ -9,25 +9,25 @@
 </head>
 <body>
     <h1>To-do list</h1>
-    <form method="POST" action="/index">
+    <form method="POST" action="/">
         <input type="text" class="addTodo" name="item">
         <input type="submit" value="+" class="submitButton">
     </form>
     <ul>
         <% for (var i=0; i<todo.length; i++){ %>
-        <form action="/index" method="POST" id="deleteForm-<%=i%>">
+        <form action="/" method="POST" id="deleteForm-<%=i%>">
             <li id="<%=i%>"><%=todo[i].item%></li>
             <input type="submit" value="Hop!" class="deleteButton">
             <script>
                 document.getElementById('deleteForm-<%=i%>').addEventListener('submit', async event => {
-                    event.preventDefault();     // This prevents the form from submitting using POST
+                    event.preventDefault();
 
                     const id = document.getElementById("deleteForm-<%=i%>").innerText;
 
-                    const res = await fetch(`http://localhost:4000/index/` + id, {
+                    const res = await fetch(`http://localhost:4000/` + id, {
                         method: 'DELETE',
                     });
-                    window.location.href='/index'
+                    window.location.href='/'
                 });
         </script>
         </form>
