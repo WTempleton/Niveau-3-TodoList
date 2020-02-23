@@ -18,6 +18,18 @@
         <form action="/index" method="POST" id="deleteForm-<%=i%>">
             <li id="<%=i%>"><%=todo[i].item%></li>
             <input type="submit" value="Hop!" class="deleteButton">
+            <script>
+                document.getElementById('deleteForm-<%=i%>').addEventListener('submit', async event => {
+                    event.preventDefault();     // This prevents the form from submitting using POST
+
+                    const id = document.getElementById("deleteForm-<%=i%>").innerText;
+
+                    const res = await fetch(`http://localhost:4000/index/` + id, {
+                        method: 'DELETE',
+                    });
+                    window.location.href='/index'
+                });
+        </script>
         </form>
         <%}%>
     </ul>
